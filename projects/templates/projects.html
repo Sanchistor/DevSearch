@@ -25,7 +25,7 @@
     </section>
     <!-- Search Result: DevList -->
     <section class="projectsList">
-        <div class="container">
+       <div class="container">
             <div class="grid grid--three">
 
                 {% for project in projects %}
@@ -35,9 +35,8 @@
                             <img class="project__thumbnail" src="{{project.featured_image.url}}" alt="project thumbnail" />
                             <div class="card__body">
                                 <h3 class="project__title">{{project.title}}</h3>
-                                <p><a class="project__author"
-                                >By
-                                        Oleksandr Zadyraka</a>
+                                <p><a class="project__author" href="{% url 'profiles' %}">By
+                                        {{project.owner.name}}</a>
                                 </p>
                                 <p class="project--rating">
                                     <span style="font-weight: bold;">{{project.vote_ratio}}%</span> Positive
