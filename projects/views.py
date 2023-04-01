@@ -1,3 +1,4 @@
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from .forms import ProjectForm
@@ -6,7 +7,11 @@ from django.db.models import Q
 
 
 # Create your views here.
+from .utils import paginationProjects
+
+
 def projects(request):
+    # search_query
     search_query = ''
     if request.GET.get('search_query'):
         search_query = request.GET.get('search_query')
@@ -14,8 +19,11 @@ def projects(request):
     tags = Tag.objects.filter(name__icontains=search_query)
 
     projects = Project.objects.distinct().filter(
-        Q(title__icontains=search_query) | Q(description__icontains=search_query) | Q(owner__name__icontains=search_query) | Q(tags__in=tags))
-    context = {'projects': projects, 'search_query': search_query}
+        Q(title__icontains=search_query) | Q(description__icontains=search_query) | Q(
+            owner__name__icontains=search_query) | Q(tags__in=tags))
+    custom_range, projects = paginationProjects(request, projects, 6)
+
+    context = {'projects': projects, 'search_query': search_query, 'custom_range': custom_range}
     return render(request, 'projects.html', context)
 
 
