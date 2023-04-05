@@ -60,7 +60,7 @@
         <p>Hello Developer, Welcome Back!</p>
       </div>
 
-      <form  method="post" action="{%url 'login'%}" class="form auth__form">
+      <form  method="post" action="" class="form auth__form">
           {%csrf_token%}
         <!-- Input:Username -->
         <div class="form__field">
@@ -74,10 +74,6 @@
           <label for="formInput#password">Password: </label>
           <input class="input input--password" id="formInput#passowrd" type="password" name="password"
             placeholder="••••••••" />
-        </div>
-        <div class="auth__actions">
-          <input class="btn btn--sub btn--lg" type="submit" value="Log In" />
-          <a href="forgetpassword.html">Forget Password?</a>
         </div>
       </form>
 
